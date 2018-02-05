@@ -91,6 +91,12 @@ public class TiamatPlaceOfInterestUpdateRouteBuilder extends BaseRouteBuilder {
                 .inOnly("direct:geoCoderStart")
                 .routeId("tiamat-poi-update-quartz");
 
+        from("activemq:queue:GeoCoderOsmUpdateNotificationQueue?transacted=true").transacted()
+                .log(LoggingLevel.INFO, "Message from JMS queue triggers Tiamat update of place of interest.")
+                .setBody(constant(TIAMAT_PLACES_OF_INTEREST_UPDATE_START))
+                .inOnly("direct:geoCoderStart")
+                .routeId("tiamat-poi-update-external");
+
         from(TIAMAT_PLACES_OF_INTEREST_UPDATE_START.getEndpoint())
                 .choice()
                 .when(constant(routeEnabled))
