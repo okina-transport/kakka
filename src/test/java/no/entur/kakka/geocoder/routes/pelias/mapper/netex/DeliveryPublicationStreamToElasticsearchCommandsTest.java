@@ -38,7 +38,7 @@ public class DeliveryPublicationStreamToElasticsearchCommandsTest {
                 new DeliveryPublicationStreamToElasticsearchCommands(new StopPlaceBoostConfiguration("{\"defaultValue\":1000, \"stopTypeFactors\":{\"airport\":{\"*\":3},\"onstreetBus\":{\"*\":2}}}"), POI_POPULARITY, Arrays.asList("leisure=stadium", "building=church"));
 
         Collection<ElasticsearchCommand> commands = mapper
-                                                            .transform(new FileInputStream("src/test/resources/no/rutebanken/kakka/geocoder/netex/tiamat-export.xml"));
+                                                            .transform(new FileInputStream("src/test/resources/no/entur/kakka/geocoder/netex/tiamat-export.xml"));
 
         Assert.assertEquals(10, commands.size());
         commands.forEach(c -> assertCommand(c));

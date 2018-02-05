@@ -32,7 +32,7 @@ public class SosiFileFilterTest {
     @Test
     public void filterByType() throws Exception {
         String targetFile = "target/filtered.sos";
-        new SosiFileFilter().filterElements(new FileInputStream("src/test/resources/no/rutebanken/kakka/geocoder/sosi/placeNames.sos"), targetFile, kv -> "NAVNEOBJEKTTYPE".equals(kv.getKey()) && "industriområde".equals(kv.getValue()));
+        new SosiFileFilter().filterElements(new FileInputStream("src/test/resources/no/entur/kakka/geocoder/sosi/placeNames.sos"), targetFile, kv -> "NAVNEOBJEKTTYPE".equals(kv.getKey()) && "industriområde".equals(kv.getValue()));
 
         Collection<ElasticsearchCommand> commands = new KartverketSosiStreamToElasticsearchCommands(new SosiElementWrapperFactory(), 1).transform(new FileInputStream(targetFile));
 

@@ -38,7 +38,7 @@ public class PlaceNamesStreamToElasticsearchCommandTest {
 
     @Test
     public void testTransform() throws Exception {
-        Collection<ElasticsearchCommand> commands = new KartverketSosiStreamToElasticsearchCommands(sosiElementWrapperFactory, placePopularity).transform(new FileInputStream("src/test/resources/no/rutebanken/kakka/geocoder/sosi/placeNames.sos"));
+        Collection<ElasticsearchCommand> commands = new KartverketSosiStreamToElasticsearchCommands(sosiElementWrapperFactory, placePopularity).transform(new FileInputStream("src/test/resources/no/entur/kakka/geocoder/sosi/placeNames.sos"));
 
         Assert.assertEquals(2, commands.size());
 

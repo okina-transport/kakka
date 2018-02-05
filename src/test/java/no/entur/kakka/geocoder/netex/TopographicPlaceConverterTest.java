@@ -51,7 +51,7 @@ public class TopographicPlaceConverterTest {
     @Test
     public void testFilterConvertAdminUnitsFromGeoJson() throws Exception {
         String filteredFilePath = "target/filtered-fylker.geojson";
-        new FeatureJSONFilter("src/test/resources/no/rutebanken/kakka/geocoder/geojson/fylker.geojson", filteredFilePath, "fylkesnr", "area").filter();
+        new FeatureJSONFilter("src/test/resources/no/entur/kakka/geocoder/geojson/fylker.geojson", filteredFilePath, "fylkesnr", "area").filter();
 
         String targetPath = "target/adm-units-from-geojson.xml";
         converter.toNetexFile(new GeoJsonCollectionTopographicPlaceReader
@@ -65,7 +65,7 @@ public class TopographicPlaceConverterTest {
     public void testConvertPlaceOfInterestFromOsmPbf() throws Exception {
         List<String> filter = Arrays.asList("leisure=common", "naptan:indicator");
         TopographicPlaceReader reader = new PbfTopographicPlaceReader(filter, IanaCountryTldEnumeration.NO,
-                                                                             new File("src/test/resources/no/rutebanken/kakka/geocoder/pbf/sample.pbf"));
+                                                                             new File("src/test/resources/no/entur/kakka/geocoder/pbf/sample.pbf"));
         String targetPath = "target/poi.xml";
         converter.toNetexFile(reader,
                 targetPath);
@@ -75,7 +75,7 @@ public class TopographicPlaceConverterTest {
 
     @Test
     public void testConvertAdminUnitsFromSosi() throws Exception {
-        TopographicPlaceReader reader = new SosiTopographicPlaceReader(new SosiElementWrapperFactory(), Arrays.asList(new File("src/test/resources/no/rutebanken/kakka/geocoder/sosi/SosiTest.sos")));
+        TopographicPlaceReader reader = new SosiTopographicPlaceReader(new SosiElementWrapperFactory(), Arrays.asList(new File("src/test/resources/no/entur/kakka/geocoder/sosi/SosiTest.sos")));
         String targetPath = "target/admin-units-from-sosi.xml";
         converter.toNetexFile(reader,
                 targetPath);
@@ -87,7 +87,7 @@ public class TopographicPlaceConverterTest {
     @Test
     public void testConvertNeighbouringCountriesFromGeoJson() throws Exception {
         TopographicPlaceReader reader = new GeoJsonSingleTopographicPlaceReader(new GeojsonFeatureWrapperFactory(null),
-                                                                                       new File("src/test/resources/no/rutebanken/kakka/geocoder/geojson/finland.geojson"));
+                                                                                       new File("src/test/resources/no/entur/kakka/geocoder/geojson/finland.geojson"));
         String targetPath = "target/neighbouring-countries_from_geosjon.xml";
         converter.toNetexFile(reader,
                 targetPath);

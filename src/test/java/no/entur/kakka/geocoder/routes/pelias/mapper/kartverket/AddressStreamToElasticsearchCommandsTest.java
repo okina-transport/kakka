@@ -43,7 +43,7 @@ public class AddressStreamToElasticsearchCommandsTest {
         AddressStreamToElasticSearchCommands transformer = new AddressStreamToElasticSearchCommands(new AddressToPeliasMapper(ADDRESS_POPULARITY), new AddressToStreetMapper(ADDRESS_STREET_POPULARITY));
 
         Collection<ElasticsearchCommand> commands = transformer
-                                                            .transform(new FileInputStream("src/test/resources/no/rutebanken/kakka/geocoder/csv/addresses.csv"));
+                                                            .transform(new FileInputStream("src/test/resources/no/entur/kakka/geocoder/csv/addresses.csv"));
 
 
         Assert.assertEquals(37, commands.size());

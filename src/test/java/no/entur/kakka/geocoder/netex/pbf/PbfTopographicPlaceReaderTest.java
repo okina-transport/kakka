@@ -34,7 +34,7 @@ public class PbfTopographicPlaceReaderTest {
 	public void testParsePbfSampleFile() throws Exception {
 		PbfTopographicPlaceReader reader =
 				new PbfTopographicPlaceReader(Arrays.asList("leisure=common", "naptan:indicator"), IanaCountryTldEnumeration.NO,
-						                             new File("src/test/resources/no/rutebanken/kakka/geocoder/pbf/sample.pbf"));
+						                             new File("src/test/resources/no/entur/kakka/geocoder/pbf/sample.pbf"));
 
 		BlockingQueue<TopographicPlace> queue = new LinkedBlockingDeque<>();
 		reader.addToQueue(queue);

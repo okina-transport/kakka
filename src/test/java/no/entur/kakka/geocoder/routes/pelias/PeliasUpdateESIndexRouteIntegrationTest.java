@@ -91,13 +91,13 @@ public class PeliasUpdateESIndexRouteIntegrationTest extends KakkaRouteBuilderIn
 		});
 
 		inMemoryBlobStoreRepository.uploadBlob(blobStoreSubdirectoryForKartverket + "/administrativeUnits/SosiTest.sos",
-				new FileInputStream(new File("src/test/resources/no/rutebanken/kakka/geocoder/sosi/SosiTest.sos")), false);
+				new FileInputStream(new File("src/test/resources/no/entur/kakka/geocoder/sosi/SosiTest.sos")), false);
 		inMemoryBlobStoreRepository.uploadBlob(blobStoreSubdirectoryForKartverket + "/placeNames/placenames.sos",
-				new FileInputStream(new File("src/test/resources/no/rutebanken/kakka/geocoder/sosi/placeNames.sos")), false);
+				new FileInputStream(new File("src/test/resources/no/entur/kakka/geocoder/sosi/placeNames.sos")), false);
 		inMemoryBlobStoreRepository.uploadBlob(blobStoreSubdirectoryForKartverket + "/addresses/addresses.csv",
-				new FileInputStream(new File("src/test/resources/no/rutebanken/kakka/geocoder/csv/addresses.csv")), false);
+				new FileInputStream(new File("src/test/resources/no/entur/kakka/geocoder/csv/addresses.csv")), false);
 		inMemoryBlobStoreRepository.uploadBlob(blobStoreSubdirectoryForTiamatGeoCoderExport + "/tiamat/tiamat-export-latest.xml",
-				new FileInputStream(new File("src/test/resources/no/rutebanken/kakka/geocoder/netex/tiamat-export.xml")), false);
+				new FileInputStream(new File("src/test/resources/no/entur/kakka/geocoder/netex/tiamat-export.xml")), false);
 
 
 		esScratchAdminIndexMock.expectedMessageCount(2);

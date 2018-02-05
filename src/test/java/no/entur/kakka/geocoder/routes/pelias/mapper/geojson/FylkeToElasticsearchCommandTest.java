@@ -33,7 +33,7 @@ public class FylkeToElasticsearchCommandTest {
 	public void testTransform() throws Exception {
 		KartverketGeoJsonStreamToElasticsearchCommands transformer = new KartverketGeoJsonStreamToElasticsearchCommands(new GeojsonFeatureWrapperFactory(null),1);
 		Collection<ElasticsearchCommand> commands = transformer
-				                                            .transform(new FileInputStream("src/test/resources/no/rutebanken/kakka/geocoder/geojson/fylker.geojson"));
+				                                            .transform(new FileInputStream("src/test/resources/no/entur/kakka/geocoder/geojson/fylker.geojson"));
 
 		Assert.assertEquals(4, commands.size());
 

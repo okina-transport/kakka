@@ -32,7 +32,7 @@ public class FeatureJSONFilterTest {
 	@Test
 	public void testFilterFylkeByArea() throws Exception {
 		String targetFile = "target/fylker-filtered.geojson";
-		FeatureJSONFilter featureJSONFilter = new FeatureJSONFilter("src/test/resources/no/rutebanken/kakka/geocoder/geojson/fylker.geojson", targetFile, "fylkesnr", "area");
+		FeatureJSONFilter featureJSONFilter = new FeatureJSONFilter("src/test/resources/no/entur/kakka/geocoder/geojson/fylker.geojson", targetFile, "fylkesnr", "area");
 
 		featureJSONFilter.filter();
 
