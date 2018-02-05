@@ -63,7 +63,7 @@ public class GeoCoderControlRouteBuilder extends BaseRouteBuilder {
 
 
 		singletonFrom("activemq:queue:GeoCoderQueue?transacted=true&messageListenerContainerFactoryRef=batchListenerContainerFactory")
-				.autoStartup("{{geocoder.autoStartup:false}}")
+				.autoStartup("{{geocoder.autoStartup:true}}")
 				.transacted()
 				.to("direct:geoCoderMergeTaskMessages")
 				.setProperty(TASK_MESSAGE, simple("${body}"))
