@@ -38,7 +38,7 @@ public class AuthorizationService {
     protected boolean authorizationEnabled;
 
     public void verifyAtLeastOne(String... roles) {
-        if (!authorizationEnabled){
+        if (!authorizationEnabled) {
             return;
         }
 
@@ -47,9 +47,7 @@ public class AuthorizationService {
 
         boolean authorized = false;
         for (String role : roles) {
-            if (role == null) {
-                authorized |= roleAssignments.stream().anyMatch(ra -> role.equals(ra.getRole()));
-            }
+            authorized |= roleAssignments.stream().anyMatch(ra -> role.equals(ra.getRole()));
         }
 
         if (!authorized) {
