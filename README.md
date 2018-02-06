@@ -1,28 +1,31 @@
 # Kakka
 
-For details, see the
-initial project setup location:
-  https://github.com/fabric8io/ipaas-quickstarts/
+Kakka is the build pipeline for the elastic search backing of the Pelias geocoder application. 
+ 
+Kakka is also responsible for triggering regular exports from Tiamat (NSR)
 
-## Liveness and readyiness
-In production, kakka can be probed with:
-- http://<host>:<port>/health/live
-- http://<host>:<port>/health/ready
-to check liveness and readiness, accordingly
 
-* Kakka currently has two spring profiles, dev and test. Use the application.properties file to switch between these.
+
+## Configuration
 * The application is unable to run without configuration. This must be defined externally to the application in a file called application.properties. Copy application.properties into either the current directory, i.e. where the application will be run from, or a /config subdirectory of this folder
 * Typical application.properties for dev environment:
 
 ```
 shutdown.timeout=1
+camel.springboot.name=Kakka
+
+
+server.admin.host=0.0.0.0
+server.admin.port=8888
+server.host=0.0.0.0
+server.port=8776
 
 blobstore.gcs.container.name=marduk-test
 blobstore.gcs.credential.path=/home/tomgag/.ssh/Carbon-ef49cabc6d04.json
 blobstore.delete.external.blobs=false
 blobstore.gcs.project.id=carbon-1287
 
-camel.springboot.name=Kakka
+
 
 logging.config=classpath:logback.xml
 logging.level.no=DEBUG
@@ -30,21 +33,6 @@ logging.level.no.entur.kakka=INFO
 logging.level.org=INFO
 logging.level.org.apache.camel.util=INFO
 
-
-logging.level.org.apache=INFO
-logging.level.org.apache=INFO
-logging.level.org.apache.http.wire=INFO
-logging.level.org.apache.activemq=INFO
-logging.level.org.apache.activemq.thread=INFO
-logging.level.org.apache.activemq.transport=INFO
-logging.level.org.apache.camel.component.file=INFO
-logging.level.org.apache.camel.component.file.remote=INFO
-logging.level.org.springframework=INFO
-
-server.admin.host=0.0.0.0
-server.admin.port=8888
-server.host=0.0.0.0
-server.port=8776
 
 spring.activemq.broker-url=tcp://localhost:51616?jms.redeliveryPolicy.maximumRedeliveries=0
 activemq.broker.host=localhost
@@ -73,3 +61,9 @@ kartverket.password=
 
 * For more docker plugin goals, see: http://ro14nd.de/docker-maven-plugin/goals.html
 
+
+## Liveness and readyiness
+In production, kakka can be probed with:
+- http://<host>:<port>/health/live
+- http://<host>:<port>/health/ready
+to check liveness and readiness, accordingly
