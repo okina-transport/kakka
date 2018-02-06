@@ -24,13 +24,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public final class KakkaKubernetesService extends KubernetesService {
-	private static final Logger log = LoggerFactory.getLogger(KakkaKubernetesService.class);
+    private static final Logger log = LoggerFactory.getLogger(KakkaKubernetesService.class);
 
-	public KakkaKubernetesService(@Value("${rutebanken.kubernetes.url:}") String kubernetesUrl,
-			                                @Value("${rutebanken.kubernetes.namespace:default}") String namespace,
-			                                @Value("${rutebanken.kubernetes.enabled:true}") boolean kubernetesEnabled) {
-		super(kubernetesUrl, namespace, kubernetesEnabled);
-	}
+    public KakkaKubernetesService(@Value("${rutebanken.kubernetes.url:}") String kubernetesUrl,
+                                         @Value("${rutebanken.kubernetes.namespace:default}") String namespace,
+                                         @Value("${rutebanken.kubernetes.enabled:true}") boolean kubernetesEnabled) {
+        super(kubernetesUrl, namespace, kubernetesEnabled);
+    }
 
 
 }
