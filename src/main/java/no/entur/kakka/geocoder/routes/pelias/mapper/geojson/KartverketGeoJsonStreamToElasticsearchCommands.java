@@ -42,7 +42,7 @@ public class KartverketGeoJsonStreamToElasticsearchCommands {
 
     private final long placeBoost;
 
-    public KartverketGeoJsonStreamToElasticsearchCommands(@Autowired GeojsonFeatureWrapperFactory wrapperFactory, @Value("${pelias.place.boost:3}") long placeBoost) {
+    public KartverketGeoJsonStreamToElasticsearchCommands(@Autowired GeojsonFeatureWrapperFactory wrapperFactory, @Value("${pelias.place.boost:4}") long placeBoost) {
         this.wrapperFactory = wrapperFactory;
         this.placeBoost = placeBoost;
     }

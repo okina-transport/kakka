@@ -34,7 +34,7 @@ public class KeycloakClientConfig {
     @Value("${iam.keycloak.client.secret}")
     private String clientSecret;
 
-    @Value("${keycloak.resource}")
+    @Value("${keycloak.resource:kakka}")
     private String clientId;
 
     @Bean

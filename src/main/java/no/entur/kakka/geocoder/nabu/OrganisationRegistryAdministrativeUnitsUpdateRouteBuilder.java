@@ -62,7 +62,7 @@ public class OrganisationRegistryAdministrativeUnitsUpdateRouteBuilder extends B
     @Value("${tiamat.countries.geojson.blobstore.subdirectory:geojson/countries}")
     private String blobStoreSubdirectoryCountries;
 
-    @Value("${organisations.api.url}")
+    @Value("${organisations.api.url:http://baba/services/organisations/}")
     private String organisationRegistryUrl;
 
 

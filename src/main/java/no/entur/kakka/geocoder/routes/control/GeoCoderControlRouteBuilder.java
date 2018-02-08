@@ -37,7 +37,7 @@ public class GeoCoderControlRouteBuilder extends BaseRouteBuilder {
 
 	private static final String TASK_MESSAGE = "RutebankenGeoCoderTaskMessage";
 
-	@Value("${geocoder.max.retries:3000}")
+	@Value("${geocoder.max.retries:600}")
 	private int maxRetries;
 
 	@Value("${geocoder.retry.delay:15000}")

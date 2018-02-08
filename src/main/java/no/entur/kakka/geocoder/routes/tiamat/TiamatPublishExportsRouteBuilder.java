@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 public class TiamatPublishExportsRouteBuilder extends BaseRouteBuilder {
 
 
-    @Value("${tiamat.publish.export.cron.schedule:0+0+23+?+*+MON-FRI}")
+    @Value("${tiamat.publish.export.cron.schedule:0+0+23+*+*+?}")
     private String cronSchedule;
 
     @Value("${tiamat.publish.export.blobstore.subdirectory:tiamat}")
@@ -50,7 +50,7 @@ public class TiamatPublishExportsRouteBuilder extends BaseRouteBuilder {
     @Value("#{'${tiamat.publish.export:}'.split(';')}")
     private List<String> exportConfigStrings;
 
-    @Value("${tiamat.export.max.retries:3000}")
+    @Value("${tiamat.export.max.retries:480}")
     private int maxRetries;
 
     @Value("${tiamat.export.retry.delay:15000}")

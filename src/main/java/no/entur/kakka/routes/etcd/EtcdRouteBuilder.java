@@ -38,7 +38,7 @@ import static no.entur.kakka.Utils.getHttp4;
 @ConditionalOnProperty(name = "etcd.in.memory", havingValue = "false", matchIfMissing = true)
 public class EtcdRouteBuilder extends BaseRouteBuilder {
 
-    @Value("${etcd.url}")
+    @Value("${etcd.url:http://etcd-client:2379}")
     private String etcdUrl;
 
 

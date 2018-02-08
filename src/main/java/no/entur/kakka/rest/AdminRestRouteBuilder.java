@@ -45,10 +45,10 @@ public class AdminRestRouteBuilder extends BaseRouteBuilder {
 
     private static final String PLAIN = "text/plain";
 
-    @Value("${server.admin.port}")
+    @Value("${server.admin.port:8080}")
     public String port;
 
-    @Value("${server.admin.host}")
+    @Value("${server.admin.host:0.0.0.0}")
     public String host;
 
     @Autowired
