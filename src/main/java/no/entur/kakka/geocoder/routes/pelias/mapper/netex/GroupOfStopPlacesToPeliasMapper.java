@@ -24,30 +24,23 @@ public class GroupOfStopPlacesToPeliasMapper {
 
     private static final String DEFAULT_LANGUAGE = "nor";
 
-    private long popularity;
-
-
-    public GroupOfStopPlacesToPeliasMapper(long popularity) {
-        this.popularity = popularity;
-    }
-
     /**
      * Map single GroupOfStopPlaces to (potentially) multiple pelias documents, one per alias/alternative name.
      * <p>
      * Pelias does not yet support queries in multiple languages / for aliases. When support for this is ready this mapping should be
      * refactored to produce a single document per GoS.
      */
-    public List<PeliasDocument> toPeliasDocuments(GroupOfStopPlaces groupOfStopPlaces) {
+    public List<PeliasDocument> toPeliasDocuments(GroupOfStopPlaces groupOfStopPlaces, long popularity) {
 
         if (!NetexPeliasMapperUtil.isValid(groupOfStopPlaces)) {
             return new ArrayList<>();
         }
         AtomicInteger cnt = new AtomicInteger();
 
-        return getNames(groupOfStopPlaces).stream().map(name -> toPeliasDocument(groupOfStopPlaces, name, cnt.getAndAdd(1))).collect(Collectors.toList());
+        return getNames(groupOfStopPlaces).stream().map(name -> toPeliasDocument(groupOfStopPlaces, name, popularity, cnt.getAndAdd(1))).collect(Collectors.toList());
     }
 
-    private PeliasDocument toPeliasDocument(GroupOfStopPlaces groupOfStopPlaces, MultilingualString name, int idx) {
+    private PeliasDocument toPeliasDocument(GroupOfStopPlaces groupOfStopPlaces, MultilingualString name, long popularity, int idx) {
         String idSuffix = idx > 0 ? "-" + idx : "";
 
         PeliasDocument document = new PeliasDocument(ADDRESS_LAYER, groupOfStopPlaces.getId() + idSuffix);

@@ -40,9 +40,11 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,18 +58,18 @@ public class DeliveryPublicationStreamToElasticsearchCommands {
 
     private final long poiBoost;
 
-    private final long gosBoost;
+    private final double gosBoostFactor;
 
     private boolean gosInclude;
 
     private final List<String> poiFilter;
 
     public DeliveryPublicationStreamToElasticsearchCommands(@Autowired StopPlaceBoostConfiguration stopPlaceBoostConfiguration, @Value("${pelias.poi.boost:1}") long poiBoost,
-                                                                   @Value("#{'${pelias.poi.filter:}'.split(',')}") List<String> poiFilter, @Value("${pelias.gos.boost:10}") long gosBoost,
+                                                                   @Value("#{'${pelias.poi.filter:}'.split(',')}") List<String> poiFilter, @Value("${pelias.gos.boost.factor.:1.0}") double gosBoostFactor,
                                                                    @Value("${pelias.gos.include:false}") boolean gosInclude) {
         this.stopPlaceBoostConfiguration = stopPlaceBoostConfiguration;
         this.poiBoost = poiBoost;
-        this.gosBoost = gosBoost;
+        this.gosBoostFactor = gosBoostFactor;
         this.gosInclude = gosInclude;
         if (poiFilter != null) {
             this.poiFilter = poiFilter.stream().filter(filter -> !StringUtils.isEmpty(filter)).collect(Collectors.toList());
@@ -88,33 +90,59 @@ public class DeliveryPublicationStreamToElasticsearchCommands {
 
     Collection<ElasticsearchCommand> fromDeliveryPublicationStructure(PublicationDeliveryStructure deliveryStructure) {
         List<ElasticsearchCommand> commands = new ArrayList<>();
-
+        List<ElasticsearchCommand> stopPlaceCommands = null;
+        List<GroupOfStopPlaces> groupOfStopPlaces = null;
         for (JAXBElement<? extends Common_VersionFrameStructure> frameStructureElmt : deliveryStructure.getDataObjects().getCompositeFrameOrCommonFrame()) {
             Common_VersionFrameStructure frameStructure = frameStructureElmt.getValue();
             if (frameStructure instanceof Site_VersionFrameStructure) {
                 Site_VersionFrameStructure siteFrame = (Site_VersionFrameStructure) frameStructure;
 
                 if (siteFrame.getStopPlaces() != null) {
-                    commands.addAll(addStopPlaceCommands(siteFrame.getStopPlaces().getStopPlace()));
+                    stopPlaceCommands = addStopPlaceCommands(siteFrame.getStopPlaces().getStopPlace());
+                    commands.addAll(stopPlaceCommands);
                 }
                 if (siteFrame.getTopographicPlaces() != null) {
                     commands.addAll(addTopographicPlaceCommands(siteFrame.getTopographicPlaces().getTopographicPlace()));
                 }
-                if (gosInclude && siteFrame.getGroupsOfStopPlaces() != null) {
-                    commands.addAll(addGroupsOfStopPlacesCommands(siteFrame.getGroupsOfStopPlaces().getGroupOfStopPlaces()));
+                if (siteFrame.getGroupsOfStopPlaces() != null) {
+                    groupOfStopPlaces = siteFrame.getGroupsOfStopPlaces().getGroupOfStopPlaces();
                 }
             }
+        }
+
+        if (gosInclude && groupOfStopPlaces != null) {
+            commands.addAll(addGroupsOfStopPlacesCommands(groupOfStopPlaces, mapPopularityPerStopPlaceId(stopPlaceCommands)));
         }
 
         return commands;
     }
 
-    private List<ElasticsearchCommand> addGroupsOfStopPlacesCommands(List<GroupOfStopPlaces> groupsOfStopPlaces){
+    private Map<String, Long> mapPopularityPerStopPlaceId(List<ElasticsearchCommand> stopPlaceCommands) {
+        Map<String, Long> popularityPerStopPlaceId = new HashMap<>();
+        if (!CollectionUtils.isEmpty(stopPlaceCommands)) {
+            for (ElasticsearchCommand command : stopPlaceCommands) {
+                PeliasDocument pd = (PeliasDocument) command.getSource();
+                popularityPerStopPlaceId.put(pd.getSourceId(), pd.getPopularity());
+            }
+        }
+        return popularityPerStopPlaceId;
+    }
+
+    private List<ElasticsearchCommand> addGroupsOfStopPlacesCommands(List<GroupOfStopPlaces> groupsOfStopPlaces, Map<String, Long> popularityPerStopPlaceId) {
+
         if (!CollectionUtils.isEmpty(groupsOfStopPlaces)) {
-            GroupOfStopPlacesToPeliasMapper mapper = new GroupOfStopPlacesToPeliasMapper(gosBoost);
-            return groupsOfStopPlaces.stream().map(gos -> mapper.toPeliasDocuments(gos)).flatMap(documents -> documents.stream()).sorted(new PeliasDocumentPopularityComparator()).filter(d -> d != null).map(p -> ElasticsearchCommand.peliasIndexCommand(p)).collect(Collectors.toList());
+            GroupOfStopPlacesToPeliasMapper mapper = new GroupOfStopPlacesToPeliasMapper();
+            return groupsOfStopPlaces.stream().map(gos -> mapper.toPeliasDocuments(gos, getPopularityForGroupOfStopPlaces(gos, popularityPerStopPlaceId))).flatMap(documents -> documents.stream()).sorted(new PeliasDocumentPopularityComparator()).filter(d -> d != null).map(p -> ElasticsearchCommand.peliasIndexCommand(p)).collect(Collectors.toList());
         }
         return new ArrayList<>();
+    }
+
+    private Long getPopularityForGroupOfStopPlaces(GroupOfStopPlaces groupOfStopPlaces, Map<String, Long> popularityPerStopPlaceId) {
+        if (groupOfStopPlaces.getMembers()==null) {
+            return null;
+        }
+        double popularity = gosBoostFactor * groupOfStopPlaces.getMembers().getStopPlaceRef().stream().map(sp -> popularityPerStopPlaceId.get(sp.getRef())).filter(Objects::nonNull).reduce(1l, Math::multiplyExact);
+        return (long) popularity;
     }
 
     private List<ElasticsearchCommand> addTopographicPlaceCommands(List<TopographicPlace> places) {

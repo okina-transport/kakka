@@ -33,13 +33,11 @@ public class DeliveryPublicationStreamToElasticsearchCommandsTest {
     private static final Long POI_POPULARITY = 5l;
 
 
-    private static final long GROUP_OF_STOP_PLACES_POPULARITY = 20l;
-
     @Test
     public void testTransform() throws Exception {
         DeliveryPublicationStreamToElasticsearchCommands mapper =
                 new DeliveryPublicationStreamToElasticsearchCommands(new StopPlaceBoostConfiguration("{\"defaultValue\":1000, \"stopTypeFactors\":{\"airport\":{\"*\":3},\"onstreetBus\":{\"*\":2}}}"),
-                                                                            POI_POPULARITY, Arrays.asList("leisure=stadium", "building=church"), GROUP_OF_STOP_PLACES_POPULARITY, true);
+                                                                            POI_POPULARITY, Arrays.asList("leisure=stadium", "building=church"), 1.0, true);
 
         Collection<ElasticsearchCommand> commands = mapper
                                                             .transform(new FileInputStream("src/test/resources/no/entur/kakka/geocoder/netex/tiamat-export.xml"));
@@ -118,7 +116,7 @@ public class DeliveryPublicationStreamToElasticsearchCommandsTest {
         Assert.assertEquals(60.002417, known.getCenterPoint().getLat(), 0.0001);
         Assert.assertEquals(10.272200, known.getCenterPoint().getLon(), 0.0001);
 
-        Assert.assertEquals(GROUP_OF_STOP_PLACES_POPULARITY, known.getPopularity().longValue());
+        Assert.assertEquals((3000 * 5000), known.getPopularity().longValue());
         Assert.assertEquals("GoS description", known.getDescriptionMap().get("nor"));
     }
 
