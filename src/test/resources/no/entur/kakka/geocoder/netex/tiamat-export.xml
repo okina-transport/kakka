@@ -21,34 +21,6 @@
     <ParticipantRef>NSR</ParticipantRef>
     <dataObjects>
         <SiteFrame created="2017-01-25T14:07:26.486+01:00" modification="new" version="any" id="NSR:SiteFrame:1">
-            <groupsOfStopPlaces>
-                <GroupOfStopPlaces created="2018-02-28T12:50:17.732" modification="new" version="1" id="NSR:GroupOfStopPlaces:1">
-                    <keyList>
-                        <KeyValue>
-                            <Key>CHANGED_BY</Key>
-                            <Value>cristoffer.solem-test</Value>
-                        </KeyValue>
-                    </keyList>
-                    <Name lang="nor">GoS Name</Name>
-                    <Description lang="nor">GoS description</Description>
-                    <members>
-                        <StopPlaceRef ref="NSR:StopPlace:39231"/>
-                        <StopPlaceRef ref="NSR:StopPlace:1000"/>
-                    </members>
-                    <Centroid>
-                        <Location>
-                            <Longitude>10.272200</Longitude>
-                            <Latitude>60.002417</Latitude>
-                        </Location>
-                    </Centroid>
-                    <alternativeNames>
-                        <AlternativeName modification="new" version="1" id="NSR:AlternativeName:777">
-                            <NameType>alias</NameType>
-                            <Name lang="nor">GoS AliasName</Name>
-                        </AlternativeName>
-                    </alternativeNames>
-                </GroupOfStopPlaces>
-            </groupsOfStopPlaces>
             <topographicPlaces modificationSet="all">
                 <TopographicPlace modification="new" version="any" id="NSR:TopographicPlace:1">
                     <Name lang="nor">Østfold</Name>
@@ -167,6 +139,34 @@
                 </TopographicPlace>
 
             </topographicPlaces>
+            <groupsOfStopPlaces>
+                <GroupOfStopPlaces created="2018-02-28T12:50:17.732" modification="new" version="1" id="NSR:GroupOfStopPlaces:1">
+                    <keyList>
+                        <KeyValue>
+                            <Key>CHANGED_BY</Key>
+                            <Value>cristoffer.solem-test</Value>
+                        </KeyValue>
+                    </keyList>
+                    <Name lang="nor">GoS Name</Name>
+                    <Description lang="nor">GoS description</Description>
+                    <members>
+                        <StopPlaceRef ref="NSR:StopPlace:39231"/>
+                        <StopPlaceRef ref="NSR:StopPlace:1000"/>
+                    </members>
+                    <Centroid>
+                        <Location>
+                            <Longitude>10.272200</Longitude>
+                            <Latitude>60.002417</Latitude>
+                        </Location>
+                    </Centroid>
+                    <alternativeNames>
+                        <AlternativeName modification="new" version="1" id="NSR:AlternativeName:777">
+                            <NameType>alias</NameType>
+                            <Name lang="nor">GoS AliasName</Name>
+                        </AlternativeName>
+                    </alternativeNames>
+                </GroupOfStopPlaces>
+            </groupsOfStopPlaces>
             <stopPlaces>
                 <StopPlace created="2017-01-23T16:59:34.554+01:00" changed="2017-01-23T16:59:34.554+01:00"
                            modification="new" version="4" id="NSR:StopPlace:39231" xsi:schemaLocation=""
