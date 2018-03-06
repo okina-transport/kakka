@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
  * Map NeTEx GroupOfStopPlaces objects to Pelias documents.
  */
 public class GroupOfStopPlacesToPeliasMapper {
-    // Using substitute layer for stops to avoid having to fork pelias (custom layers not configurable).
-    public static final String STOP_PLACE_LAYER = "venue";
+    // Using substitute layer for GoS to avoid having to fork pelias (custom layers not configurable).
+    public static final String ADDRESS_LAYER = "address";
 
     private static final String DEFAULT_LANGUAGE = "nor";
 
@@ -50,7 +50,7 @@ public class GroupOfStopPlacesToPeliasMapper {
     private PeliasDocument toPeliasDocument(GroupOfStopPlaces groupOfStopPlaces, MultilingualString name, int idx) {
         String idSuffix = idx > 0 ? "-" + idx : "";
 
-        PeliasDocument document = new PeliasDocument(STOP_PLACE_LAYER, groupOfStopPlaces.getId() + idSuffix);
+        PeliasDocument document = new PeliasDocument(ADDRESS_LAYER, groupOfStopPlaces.getId() + idSuffix);
         if (name != null) {
             document.setDefaultNameAndPhrase(name.getValue());
         }

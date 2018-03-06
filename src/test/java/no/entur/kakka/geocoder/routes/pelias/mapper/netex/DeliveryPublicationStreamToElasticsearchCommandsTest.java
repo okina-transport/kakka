@@ -112,7 +112,7 @@ public class DeliveryPublicationStreamToElasticsearchCommandsTest {
         Assert.assertEquals(defaultName, known.getDefaultName());
         Assert.assertEquals("GoS Name", known.getNameMap().get("nor"));
         Assert.assertEquals("GoS Name", known.getNameMap().get("display"));
-        Assert.assertEquals(StopPlaceToPeliasMapper.STOP_PLACE_LAYER, known.getLayer());
+        Assert.assertEquals("address", known.getLayer());
         Assert.assertEquals(PeliasDocument.DEFAULT_SOURCE, known.getSource());
         Assert.assertEquals(Arrays.asList("GroupOfStopPlaces"), known.getCategory());
         Assert.assertEquals(60.002417, known.getCenterPoint().getLat(), 0.0001);
