@@ -45,8 +45,8 @@ public class StopPlaceToPeliasMapper extends AbstractNetexPlaceToPeliasDocumentM
 
     private StopPlaceBoostConfiguration boostConfiguration;
 
-    public StopPlaceToPeliasMapper(String participantRef, StopPlaceBoostConfiguration boostConfiguration) {
-        super(participantRef);
+    public StopPlaceToPeliasMapper(StopPlaceBoostConfiguration boostConfiguration) {
+        super();
         this.boostConfiguration = boostConfiguration;
     }
 
@@ -72,7 +72,7 @@ public class StopPlaceToPeliasMapper extends AbstractNetexPlaceToPeliasDocumentM
         collectNames(placeHierarchy, names, true);
         collectNames(placeHierarchy, names, false);
 
-        return names.stream().filter(distinctByKey(name -> name.getValue())).collect(Collectors.toList());
+        return NetexPeliasMapperUtil.filterUnique(names);
     }
 
     private void collectNames(PlaceHierarchy<StopPlace> placeHierarchy, List<MultilingualString> names, boolean up) {

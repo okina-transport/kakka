@@ -22,6 +22,7 @@ import no.entur.kakka.geocoder.routes.pelias.json.PeliasDocument;
 import no.entur.kakka.geocoder.routes.pelias.mapper.netex.boost.StopPlaceBoostConfiguration;
 import org.apache.commons.collections.CollectionUtils;
 import org.rutebanken.netex.model.Common_VersionFrameStructure;
+import org.rutebanken.netex.model.GroupOfStopPlaces;
 import org.rutebanken.netex.model.PublicationDeliveryStructure;
 import org.rutebanken.netex.model.Site_VersionFrameStructure;
 import org.rutebanken.netex.model.StopPlace;
@@ -55,11 +56,19 @@ public class DeliveryPublicationStreamToElasticsearchCommands {
 
     private final long poiBoost;
 
+    private final long gosBoost;
+
+    private boolean gosInclude;
+
     private final List<String> poiFilter;
 
-    public DeliveryPublicationStreamToElasticsearchCommands(@Autowired StopPlaceBoostConfiguration stopPlaceBoostConfiguration, @Value("${pelias.poi.boost:1}") long poiBoost, @Value("#{'${pelias.poi.filter:}'.split(',')}") List<String> poiFilter) {
+    public DeliveryPublicationStreamToElasticsearchCommands(@Autowired StopPlaceBoostConfiguration stopPlaceBoostConfiguration, @Value("${pelias.poi.boost:1}") long poiBoost,
+                                                                   @Value("#{'${pelias.poi.filter:}'.split(',')}") List<String> poiFilter, @Value("${pelias.gos.boost:10}") long gosBoost,
+                                                                   @Value("${pelias.gos.include:false}") boolean gosInclude) {
         this.stopPlaceBoostConfiguration = stopPlaceBoostConfiguration;
         this.poiBoost = poiBoost;
+        this.gosBoost = gosBoost;
+        this.gosInclude = gosInclude;
         if (poiFilter != null) {
             this.poiFilter = poiFilter.stream().filter(filter -> !StringUtils.isEmpty(filter)).collect(Collectors.toList());
         } else {
@@ -86,10 +95,13 @@ public class DeliveryPublicationStreamToElasticsearchCommands {
                 Site_VersionFrameStructure siteFrame = (Site_VersionFrameStructure) frameStructure;
 
                 if (siteFrame.getStopPlaces() != null) {
-                    commands.addAll(addStopPlaceCommands(siteFrame.getStopPlaces().getStopPlace(), deliveryStructure.getParticipantRef()));
+                    commands.addAll(addStopPlaceCommands(siteFrame.getStopPlaces().getStopPlace()));
                 }
                 if (siteFrame.getTopographicPlaces() != null) {
-                    commands.addAll(addTopographicPlaceCommands(siteFrame.getTopographicPlaces().getTopographicPlace(), deliveryStructure.getParticipantRef()));
+                    commands.addAll(addTopographicPlaceCommands(siteFrame.getTopographicPlaces().getTopographicPlace()));
+                }
+                if (gosInclude && siteFrame.getGroupsOfStopPlaces() != null) {
+                    commands.addAll(addGroupsOfStopPlacesCommands(siteFrame.getGroupsOfStopPlaces().getGroupOfStopPlaces()));
                 }
             }
         }
@@ -97,17 +109,25 @@ public class DeliveryPublicationStreamToElasticsearchCommands {
         return commands;
     }
 
-    private List<ElasticsearchCommand> addTopographicPlaceCommands(List<TopographicPlace> places, String participantRef) {
+    private List<ElasticsearchCommand> addGroupsOfStopPlacesCommands(List<GroupOfStopPlaces> groupsOfStopPlaces){
+        if (!CollectionUtils.isEmpty(groupsOfStopPlaces)) {
+            GroupOfStopPlacesToPeliasMapper mapper = new GroupOfStopPlacesToPeliasMapper(gosBoost);
+            return groupsOfStopPlaces.stream().map(gos -> mapper.toPeliasDocuments(gos)).flatMap(documents -> documents.stream()).sorted(new PeliasDocumentPopularityComparator()).filter(d -> d != null).map(p -> ElasticsearchCommand.peliasIndexCommand(p)).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+    private List<ElasticsearchCommand> addTopographicPlaceCommands(List<TopographicPlace> places) {
         if (!CollectionUtils.isEmpty(places)) {
-            TopographicPlaceToPeliasMapper mapper = new TopographicPlaceToPeliasMapper(participantRef, poiBoost, poiFilter);
+            TopographicPlaceToPeliasMapper mapper = new TopographicPlaceToPeliasMapper(poiBoost, poiFilter);
             return places.stream().map(p -> mapper.toPeliasDocuments(new PlaceHierarchy<TopographicPlace>(p))).flatMap(documents -> documents.stream()).sorted(new PeliasDocumentPopularityComparator()).filter(d -> d != null).map(p -> ElasticsearchCommand.peliasIndexCommand(p)).collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
 
-    private List<ElasticsearchCommand> addStopPlaceCommands(List<StopPlace> places, String participantRef) {
+    private List<ElasticsearchCommand> addStopPlaceCommands(List<StopPlace> places) {
         if (!CollectionUtils.isEmpty(places)) {
-            StopPlaceToPeliasMapper mapper = new StopPlaceToPeliasMapper(participantRef, stopPlaceBoostConfiguration);
+            StopPlaceToPeliasMapper mapper = new StopPlaceToPeliasMapper(stopPlaceBoostConfiguration);
 
             Set<PlaceHierarchy<StopPlace>> stopPlaceHierarchies = toPlaceHierarchies(places);
 

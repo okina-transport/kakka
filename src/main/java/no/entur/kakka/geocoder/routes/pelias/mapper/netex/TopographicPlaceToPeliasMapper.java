@@ -35,8 +35,8 @@ public class TopographicPlaceToPeliasMapper extends AbstractNetexPlaceToPeliasDo
 
     private List<String> typeFilter;
 
-    public TopographicPlaceToPeliasMapper(String participantRef, long popularity, List<String> typeFilter) {
-        super(participantRef);
+    public TopographicPlaceToPeliasMapper(long popularity, List<String> typeFilter) {
+        super();
         this.popularity = popularity;
         this.typeFilter = typeFilter;
     }
@@ -80,7 +80,7 @@ public class TopographicPlaceToPeliasMapper extends AbstractNetexPlaceToPeliasDo
         if (place.getAlternativeDescriptors() != null && !CollectionUtils.isEmpty(place.getAlternativeDescriptors().getTopographicPlaceDescriptor())) {
             place.getAlternativeDescriptors().getTopographicPlaceDescriptor().stream().filter(an -> an.getName() != null && an.getName().getLang() != null).forEach(n -> names.add(n.getName()));
         }
-        return names.stream().filter(distinctByKey(name -> name.getValue())).collect(Collectors.toList());
+        return NetexPeliasMapperUtil.filterUnique(names);
     }
 
 

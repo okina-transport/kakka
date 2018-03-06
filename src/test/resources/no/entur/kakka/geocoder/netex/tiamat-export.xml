@@ -21,31 +21,59 @@
     <ParticipantRef>NSR</ParticipantRef>
     <dataObjects>
         <SiteFrame created="2017-01-25T14:07:26.486+01:00" modification="new" version="any" id="NSR:SiteFrame:1">
+            <groupsOfStopPlaces>
+                <GroupOfStopPlaces created="2018-02-28T12:50:17.732" modification="new" version="1" id="NSR:GroupOfStopPlaces:1">
+                    <keyList>
+                        <KeyValue>
+                            <Key>CHANGED_BY</Key>
+                            <Value>cristoffer.solem-test</Value>
+                        </KeyValue>
+                    </keyList>
+                    <Name lang="nor">GoS Name</Name>
+                    <Description lang="nor">GoS description</Description>
+                    <members>
+                        <StopPlaceRef ref="NSR:StopPlace:39231"/>
+                        <StopPlaceRef ref="NSR:StopPlace:1000"/>
+                    </members>
+                    <Centroid>
+                        <Location>
+                            <Longitude>10.272200</Longitude>
+                            <Latitude>60.002417</Latitude>
+                        </Location>
+                    </Centroid>
+                    <alternativeNames>
+                        <AlternativeName modification="new" version="1" id="NSR:AlternativeName:777">
+                            <NameType>alias</NameType>
+                            <Name lang="nor">GoS AliasName</Name>
+                        </AlternativeName>
+                    </alternativeNames>
+                </GroupOfStopPlaces>
+            </groupsOfStopPlaces>
             <topographicPlaces modificationSet="all">
                 <TopographicPlace modification="new" version="any" id="NSR:TopographicPlace:1">
-                    <Name lang="no">Østfold</Name>
+                    <Name lang="nor">Østfold</Name>
                     <Descriptor>
                         <Name>Østfold</Name>
                     </Descriptor>
                     <TopographicPlaceType>county</TopographicPlaceType>
-                    <CountryRef ref="no"/>
+                    <CountryRef ref="nor"/>
                 </TopographicPlace>
                 <TopographicPlace modification="new" version="any" id="NSR:TopographicPlace:2">
-                    <Name lang="no">Sarpsborg</Name>
+                    <Name lang="nor">Sarpsborg</Name>
                     <Descriptor>
                         <Name>Sarpsborg</Name>
                     </Descriptor>
                     <TopographicPlaceType>municipality</TopographicPlaceType>
-                    <CountryRef ref="no"/>
+                    <CountryRef ref="nor"/>
                     <ParentTopographicPlaceRef ref="1"/>
                 </TopographicPlace>
                 <TopographicPlace modification="new" version="any" id="NSR:TopographicPlace:3">
-                    <Name lang="no">Fredrikstad</Name>
+                    <Name lang="nor">Fredrikstad</Name>
                     <Descriptor>
                         <Name>Fredrikstad</Name>
                     </Descriptor>
                     <TopographicPlaceType>municipality</TopographicPlaceType>
-                    <CountryRef ref="no"/>
+                    <CountryRef ref="nor"/>
                     <ParentTopographicPlaceRef ref="1"/>
                 </TopographicPlace>
                 <TopographicPlace created="2017-04-21T14:24:52.265+02:00" modification="new" version="1"
@@ -89,10 +117,10 @@
                         </ns2:exterior>
                     </ns2:Polygon>
                     <Descriptor>
-                        <Name lang="no">Stranda kyrkje</Name>
+                        <Name lang="nor">Stranda kyrkje</Name>
                     </Descriptor>
                     <TopographicPlaceType>placeOfInterest</TopographicPlaceType>
-                    <CountryRef ref="no"></CountryRef>
+                    <CountryRef ref="nor"></CountryRef>
                 </TopographicPlace>
 
                 <TopographicPlace created="2017-04-21T14:24:52.265+02:00" modification="new" version="1"
@@ -132,10 +160,10 @@
                         </ns2:exterior>
                     </ns2:Polygon>
                     <Descriptor>
-                        <Name lang="no">Filtered out topographic place</Name>
+                        <Name lang="nor">Filtered out topographic place</Name>
                     </Descriptor>
                     <TopographicPlaceType>placeOfInterest</TopographicPlaceType>
-                    <CountryRef ref="no"></CountryRef>
+                    <CountryRef ref="nor"></CountryRef>
                 </TopographicPlace>
 
             </topographicPlaces>
@@ -151,8 +179,8 @@
                             <Value>AVI:StopPlace:EVE</Value>
                         </KeyValue>
                     </keyList>
-                    <Name lang="no">Harstad/Narvik Lufthavn</Name>
-                    <Description lang="no">Norsk beskrivelse</Description>
+                    <Name lang="nor">Harstad/Narvik Lufthavn</Name>
+                    <Description lang="nor">Norsk beskrivelse</Description>
                     <Centroid>
                         <Location>
                             <Longitude>16.687364</Longitude>
@@ -163,7 +191,7 @@
                     <alternativeNames>
                         <AlternativeName modification="new" version="1" id="NSR:AlternativeName:6">
                             <NameType>alias</NameType>
-                            <Name lang="no">AliasName</Name>
+                            <Name lang="nor">AliasName</Name>
                         </AlternativeName>
                     </alternativeNames>
                     <TopographicPlaceRef ref="92"/>
@@ -212,7 +240,7 @@
                             <Value>true</Value>
                         </KeyValue>
                     </keyList>
-                    <Name lang="no">QuayLessParentStop</Name>
+                    <Name lang="nor">QuayLessParentStop</Name>
                     <Centroid>
                         <Location>
                             <Longitude>16.687364</Longitude>
@@ -240,7 +268,7 @@
                             <Value>AVI:StopPlace:EVE</Value>
                         </KeyValue>
                     </keyList>
-                    <Name lang="no">Child stop - airport</Name>
+                    <Name lang="nor">Child stop - airport</Name>
                     <Centroid>
                         <Location>
                             <Longitude>16.687364</Longitude>
@@ -289,7 +317,7 @@
                             <Value>AVI:StopPlace:EVE</Value>
                         </KeyValue>
                     </keyList>
-                    <Name lang="no">Child stop - bus</Name>
+                    <Name lang="nor">Child stop - bus</Name>
                     <Centroid>
                         <Location>
                             <Longitude>16.687364</Longitude>
@@ -337,7 +365,7 @@
                             <Value>AVI:StopPlace:EVE</Value>
                         </KeyValue>
                     </keyList>
-                    <Name lang="no">RailReplacementBus</Name>
+                    <Name lang="nor">RailReplacementBus</Name>
                     <Centroid>
                         <Location>
                             <Longitude>16.687364</Longitude>
@@ -386,7 +414,7 @@
                             <Value>AVI:StopPlace:EVE</Value>
                         </KeyValue>
                     </keyList>
-                    <Name lang="no">QuayLessStop</Name>
+                    <Name lang="nor">QuayLessStop</Name>
                     <Centroid>
                         <Location>
                             <Longitude>16.687364</Longitude>
@@ -415,7 +443,7 @@
                             <Value>AVI:StopPlace:EVE</Value>
                         </KeyValue>
                     </keyList>
-                    <Name lang="no">OutdatedStop</Name>
+                    <Name lang="nor">OutdatedStop</Name>
                     <Centroid>
                         <Location>
                             <Longitude>16.687364</Longitude>
