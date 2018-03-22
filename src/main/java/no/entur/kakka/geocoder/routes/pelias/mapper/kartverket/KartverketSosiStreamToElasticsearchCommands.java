@@ -36,7 +36,7 @@ public class KartverketSosiStreamToElasticsearchCommands {
 
     private final long placeBoost;
 
-    public KartverketSosiStreamToElasticsearchCommands(@Autowired SosiElementWrapperFactory sosiElementWrapperFactory, @Value("${pelias.place.boost:3}") long placeBoost) {
+    public KartverketSosiStreamToElasticsearchCommands(@Autowired SosiElementWrapperFactory sosiElementWrapperFactory, @Value("${pelias.place.boost:4}") long placeBoost) {
         this.placeBoost = placeBoost;
         this.sosiElementWrapperFactory = sosiElementWrapperFactory;
     }
