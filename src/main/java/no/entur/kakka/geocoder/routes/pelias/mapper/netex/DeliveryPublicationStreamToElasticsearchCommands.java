@@ -66,7 +66,7 @@ public class DeliveryPublicationStreamToElasticsearchCommands {
 
     public DeliveryPublicationStreamToElasticsearchCommands(@Autowired StopPlaceBoostConfiguration stopPlaceBoostConfiguration, @Value("${pelias.poi.boost:1}") long poiBoost,
                                                                    @Value("#{'${pelias.poi.filter:}'.split(',')}") List<String> poiFilter, @Value("${pelias.gos.boost.factor.:1.0}") double gosBoostFactor,
-                                                                   @Value("${pelias.gos.include:false}") boolean gosInclude) {
+                                                                   @Value("${pelias.gos.include:true}") boolean gosInclude) {
         this.stopPlaceBoostConfiguration = stopPlaceBoostConfiguration;
         this.poiBoost = poiBoost;
         this.gosBoostFactor = gosBoostFactor;
