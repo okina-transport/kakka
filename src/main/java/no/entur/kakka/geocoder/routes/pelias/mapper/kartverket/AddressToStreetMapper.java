@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -30,17 +31,17 @@ import java.util.stream.Collectors;
 
 /**
  * Create "street" documents for Pelias from addresses.
- *
+ * <p>
  * Streets are assumed to be contained fully in a single locality (kommune) and the names for streets are assumed to be unique within a single locality.
- *
+ * <p>
  * Centerpoint and parent info for street is fetched from the median address (ordered by number + alpha) in the street.
- *
+ * <p>
  * NB! Streets are stored in the "address" layer in pelias, as this is prioritized
- *
  */
 @Service
 public class AddressToStreetMapper {
 
+    private static final String STREET_CATEGORY = "street";
 
     private final long popularity;
 
@@ -50,7 +51,7 @@ public class AddressToStreetMapper {
 
     public List<PeliasDocument> createStreetPeliasDocumentsFromAddresses(Collection<PeliasDocument> addresses) {
         Collection<List<PeliasDocument>> addressesPerStreet =
-                addresses.stream().filter(a -> a.getAddressParts()!=null && !StringUtils.isEmpty(a.getAddressParts().getStreet()))
+                addresses.stream().filter(a -> a.getAddressParts() != null && !StringUtils.isEmpty(a.getAddressParts().getStreet()))
                         .collect(Collectors.groupingBy(a -> fromAddress(a), Collectors.mapping(Function.identity(), Collectors.toList()))).values();
         return addressesPerStreet.stream().map(addressesOnStreet -> createPeliasStreetDocFromAddresses(addressesOnStreet)).collect(Collectors.toList());
     }
@@ -72,6 +73,7 @@ public class AddressToStreetMapper {
         addressParts.setStreet(streetName);
         streetDocument.setAddressParts(addressParts);
 
+        streetDocument.setCategory(Arrays.asList(STREET_CATEGORY));
         streetDocument.setPopularity(popularity);
 
         return streetDocument;
@@ -79,7 +81,6 @@ public class AddressToStreetMapper {
 
     /**
      * Use median address in street (ordered by number + alpha) as representative of the street.
-
      */
     private PeliasDocument getAddressRepresentingStreet(List<PeliasDocument> addressesOnStreet) {
         Collections.sort(addressesOnStreet,
