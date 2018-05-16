@@ -17,10 +17,10 @@
 package no.entur.kakka.geocoder.routes.kartverket;
 
 import no.entur.kakka.Constants;
-import no.entur.kakka.geocoder.BaseRouteBuilder;
-import no.entur.kakka.domain.FileNameAndDigest;
-import no.entur.kakka.geocoder.routes.util.MarkContentChangedAggregationStrategy;
 import no.entur.kakka.domain.BlobStoreFiles;
+import no.entur.kakka.domain.FileNameAndDigest;
+import no.entur.kakka.geocoder.BaseRouteBuilder;
+import no.entur.kakka.geocoder.routes.util.MarkContentChangedAggregationStrategy;
 import no.entur.kakka.services.BlobStoreService;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
@@ -28,7 +28,6 @@ import org.apache.camel.spi.IdempotentRepository;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.InputStream;
@@ -39,7 +38,7 @@ import java.util.stream.Collectors;
 
 import static org.apache.camel.Exchange.FILE_PARENT;
 
-@Component
+//@Component
 public class KartverketFileRouteBuilder extends BaseRouteBuilder {
 	@Autowired
 	private IdempotentRepository idempotentDownloadRepository;

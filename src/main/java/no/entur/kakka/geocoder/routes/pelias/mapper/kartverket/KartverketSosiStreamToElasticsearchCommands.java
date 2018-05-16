@@ -17,18 +17,17 @@
 package no.entur.kakka.geocoder.routes.pelias.mapper.kartverket;
 
 import no.entur.kakka.geocoder.netex.TopographicPlaceAdapter;
-import no.entur.kakka.geocoder.sosi.SosiElementWrapperFactory;
 import no.entur.kakka.geocoder.routes.pelias.elasticsearch.ElasticsearchCommand;
+import no.entur.kakka.geocoder.sosi.SosiElementWrapperFactory;
 import no.entur.kakka.geocoder.sosi.SosiTopographicPlaceAdapterReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-@Service
+//@Service
 public class KartverketSosiStreamToElasticsearchCommands {
 
 

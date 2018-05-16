@@ -32,12 +32,11 @@ import org.apache.camel.LoggingLevel;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import javax.ws.rs.core.MediaType;
 import java.io.File;
 
-@Component
+//@Component
 public class TiamatAdministrativeUnitsUpdateRouteBuilder extends BaseRouteBuilder {
 
     @Value("${kartverket.blobstore.subdirectory:kartverket}")

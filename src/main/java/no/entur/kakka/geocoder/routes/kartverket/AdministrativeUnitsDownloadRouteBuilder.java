@@ -24,9 +24,8 @@ import no.entur.kakka.geocoder.routes.control.GeoCoderTaskType;
 import no.entur.kakka.routes.status.JobEvent;
 import org.apache.camel.LoggingLevel;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class AdministrativeUnitsDownloadRouteBuilder extends BaseRouteBuilder {
 
 	/**

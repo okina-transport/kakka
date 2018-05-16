@@ -17,12 +17,12 @@
 package no.entur.kakka.geocoder.routes.pelias;
 
 
+import no.entur.kakka.geocoder.BaseRouteBuilder;
 import no.entur.kakka.geocoder.GeoCoderConstants;
 import no.entur.kakka.geocoder.routes.control.GeoCoderTaskType;
 import no.entur.kakka.geocoder.routes.pelias.babylon.DeploymentStatus;
 import no.entur.kakka.geocoder.routes.pelias.babylon.ScalingOrder;
 import no.entur.kakka.geocoder.routes.pelias.babylon.StartFile;
-import no.entur.kakka.geocoder.BaseRouteBuilder;
 import no.entur.kakka.routes.status.JobEvent;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
@@ -30,12 +30,11 @@ import org.apache.camel.component.http4.HttpMethods;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import static no.entur.kakka.Constants.JOB_STATUS_ROUTING_DESTINATION;
 import static no.entur.kakka.geocoder.GeoCoderConstants.*;
 
-@Component
+//@Component
 public class PeliasUpdateRouteBuilder extends BaseRouteBuilder {
 
     /**

@@ -19,15 +19,14 @@ package no.entur.kakka.geocoder.routes.kartverket;
 
 import no.entur.kakka.Constants;
 import no.entur.kakka.geocoder.BaseRouteBuilder;
-import no.entur.kakka.routes.status.JobEvent;
 import no.entur.kakka.geocoder.routes.control.GeoCoderTaskType;
+import no.entur.kakka.routes.status.JobEvent;
 import org.apache.camel.LoggingLevel;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import static no.entur.kakka.geocoder.GeoCoderConstants.*;
 
-@Component
+//@Component
 public class AddressDownloadRouteBuilder extends BaseRouteBuilder {
 
 	/**

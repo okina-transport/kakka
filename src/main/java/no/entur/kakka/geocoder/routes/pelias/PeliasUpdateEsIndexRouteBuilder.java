@@ -19,11 +19,11 @@ package no.entur.kakka.geocoder.routes.pelias;
 import com.google.common.collect.Lists;
 import no.entur.kakka.Constants;
 import no.entur.kakka.exceptions.KakkaException;
+import no.entur.kakka.geocoder.BaseRouteBuilder;
 import no.entur.kakka.geocoder.GeoCoderConstants;
 import no.entur.kakka.geocoder.routes.util.AbortRouteException;
 import no.entur.kakka.geocoder.routes.util.MarkContentChangedAggregationStrategy;
 import no.entur.kakka.geocoder.sosi.SosiFileFilter;
-import no.entur.kakka.geocoder.BaseRouteBuilder;
 import no.entur.kakka.routes.file.ZipFileUtils;
 import org.apache.camel.Exchange;
 import org.apache.camel.LoggingLevel;
@@ -36,7 +36,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.InputStream;
@@ -49,7 +48,7 @@ import static no.entur.kakka.Constants.FILE_HANDLE;
 import static org.apache.camel.builder.Builder.exceptionStackTrace;
 import static org.apache.commons.io.FileUtils.deleteDirectory;
 
-@Component
+//@Component
 public class PeliasUpdateEsIndexRouteBuilder extends BaseRouteBuilder {
 
     @Value("${elasticsearch.scratch.url:http4://es-scratch:9200}")

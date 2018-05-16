@@ -31,7 +31,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 
-@Component
+//@Component
 public class GeoCoderControlRouteBuilder extends BaseRouteBuilder {
 
 
