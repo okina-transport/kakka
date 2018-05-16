@@ -18,8 +18,8 @@
     <description>Geocoder builder</description>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com:entur/kakka.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:entur/kakka.git</developerConnection>
+        <connection>scm:git:ssh://git@github.com:okina-transport/kakka.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:okina-transport/kakka.git</developerConnection>
     </scm>
 
     <properties>
@@ -38,9 +38,8 @@
         <keycloak.version>3.2.1.Final</keycloak.version>
         <spring.security.version>4.2.3.RELEASE</spring.security.version>
         <!-- Docker & Fabric8 Configs -->
-        <docker.from>eu.gcr.io/carbon-1287/java-base-image</docker.from>
-        <fabric8.dockerUser>carbon-1287/</fabric8.dockerUser>
-        <docker.image>eu.gcr.io/${fabric8.dockerUser}${project.artifactId}:${project.version}</docker.image>
+        <docker.from>registry.okina.fr/na/java-base-image</docker.from>
+        <docker.image>registry.okina.fr/na/${project.artifactId}:${project.version}</docker.image>
         <docker.cleanup>none</docker.cleanup>
 
         <!-- fabric8.env.AB_JOLOKIA_AUTH_OPENSHIFT>true</fabric8.env.AB_JOLOKIA_AUTH_OPENSHIFT -->
