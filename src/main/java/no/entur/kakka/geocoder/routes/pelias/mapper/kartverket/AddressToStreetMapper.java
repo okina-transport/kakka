@@ -19,6 +19,7 @@ package no.entur.kakka.geocoder.routes.pelias.mapper.kartverket;
 import no.entur.kakka.geocoder.routes.pelias.json.AddressParts;
 import no.entur.kakka.geocoder.routes.pelias.json.PeliasDocument;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
@@ -37,7 +38,7 @@ import java.util.stream.Collectors;
  * <p>
  * NB! Streets are stored in the "address" layer in pelias, as this is prioritized
  */
-//@Service
+@Service
 public class AddressToStreetMapper {
 
     private static final String STREET_CATEGORY = "street";

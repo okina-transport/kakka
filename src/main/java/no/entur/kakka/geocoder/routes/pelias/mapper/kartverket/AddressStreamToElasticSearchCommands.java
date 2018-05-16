@@ -21,6 +21,7 @@ import no.entur.kakka.geocoder.routes.pelias.json.PeliasDocument;
 import no.entur.kakka.geocoder.routes.pelias.kartverket.KartverketAddress;
 import no.entur.kakka.geocoder.routes.pelias.kartverket.KartverketAddressReader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.Collection;
@@ -28,7 +29,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@Service
+@Service
 public class AddressStreamToElasticSearchCommands {
 
     private AddressToPeliasMapper addressMapper;

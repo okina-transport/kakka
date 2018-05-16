@@ -24,12 +24,13 @@ import no.entur.kakka.geocoder.routes.pelias.mapper.kartverket.*;
 import org.opengis.feature.simple.SimpleFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-//@Service
+@Service
 public class KartverketGeoJsonStreamToElasticsearchCommands {
 
     private final GeojsonFeatureWrapperFactory wrapperFactory;
