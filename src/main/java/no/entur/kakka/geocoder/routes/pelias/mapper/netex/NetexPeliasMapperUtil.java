@@ -2,7 +2,7 @@ package no.entur.kakka.geocoder.routes.pelias.mapper.netex;
 
 import net.opengis.gml._3.AbstractRingType;
 import net.opengis.gml._3.LinearRingType;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.geojson.LngLatAlt;
 import org.geojson.Polygon;
 import org.rutebanken.netex.model.GroupOfEntities_VersionStructure;

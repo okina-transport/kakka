@@ -3,7 +3,7 @@ package no.entur.kakka.geocoder.routes.pelias.mapper.netex;
 import no.entur.kakka.geocoder.routes.pelias.json.AddressParts;
 import no.entur.kakka.geocoder.routes.pelias.json.GeoPoint;
 import no.entur.kakka.geocoder.routes.pelias.json.PeliasDocument;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.rutebanken.netex.model.GroupOfStopPlaces;
 import org.rutebanken.netex.model.LocationStructure;

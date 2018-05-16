@@ -28,6 +28,7 @@ import org.apache.camel.model.ModelCamelContext;
 import org.apache.camel.spi.IdempotentRepository;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -30,11 +30,12 @@ import org.apache.camel.ProducerTemplate;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
-
+@Ignore
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = TiamatChangeLogExportRouteBuilder.class, properties = "spring.main.sources=no.entur.kakka.test")
 public class TiamatChangeLogExportRouteIntegrationTest extends KakkaRouteBuilderIntegrationTestBase {
 

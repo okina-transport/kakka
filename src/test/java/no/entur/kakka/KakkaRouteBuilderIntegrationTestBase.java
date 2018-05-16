@@ -20,6 +20,7 @@ import org.apache.camel.builder.AdviceWithRouteBuilder;
 import org.apache.camel.model.ModelCamelContext;
 import org.apache.camel.test.spring.CamelSpringRunner;
 import org.apache.camel.test.spring.UseAdviceWith;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;

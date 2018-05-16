@@ -20,7 +20,7 @@ import no.entur.kakka.exceptions.FileValidationException;
 import no.entur.kakka.geocoder.routes.pelias.elasticsearch.ElasticsearchCommand;
 import no.entur.kakka.geocoder.routes.pelias.json.PeliasDocument;
 import no.entur.kakka.geocoder.routes.pelias.mapper.netex.boost.StopPlaceBoostConfiguration;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.rutebanken.netex.model.Common_VersionFrameStructure;
 import org.rutebanken.netex.model.GroupOfStopPlaces;
 import org.rutebanken.netex.model.PublicationDeliveryStructure;
