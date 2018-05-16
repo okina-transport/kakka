@@ -155,7 +155,7 @@
         </dependency>
 
         <dependency>
-            <groupId>org.rutebanken.helpers</groupId>
+            <groupId>org.entur.helpers</groupId>
             <artifactId>gcp-storage</artifactId>
             <version>${gcp-storage.version}</version>
             <exclusions>
@@ -276,17 +276,17 @@
             <version>2.6.1</version>
         </dependency>
         <dependency>
-            <groupId>org.rutebanken.helpers</groupId>
+            <groupId>org.entur.helpers</groupId>
             <artifactId>hazelcast-helper</artifactId>
             <version>${rutebanken.helpers.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.rutebanken.helpers</groupId>
+            <groupId>org.entur.helpers</groupId>
             <artifactId>organisation</artifactId>
             <version>${rutebanken.helpers.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.rutebanken.helpers</groupId>
+            <groupId>org.entur.helpers</groupId>
             <artifactId>jms-batch</artifactId>
             <version>${rutebanken.helpers.version}</version>
         </dependency>
