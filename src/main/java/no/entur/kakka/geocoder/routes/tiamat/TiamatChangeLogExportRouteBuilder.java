@@ -111,7 +111,7 @@ public class TiamatChangeLogExportRouteBuilder extends BaseRouteBuilder {
                 .process(e -> e.getIn().setBody(ZipFileUtils.zipFilesInFolder(localWorkingDirectory + "/content", localWorkingDirectory + "/result.zip")))
                 .setHeader(Constants.FILE_HANDLE, simple(blobStoreSubdirectoryForTiamatExport + "/${exchangeProperty." + Constants.TIAMAT_EXPORT_TASKS + ".currentTask.name}" +
                                                        "_${header." + CNT + "}_${header." + FROM + "}-${header." + TO + "}.zip"))
-                .setHeader(Constants.BLOBSTORE_MAKE_BLOB_PUBLIC, constant(true))
+                .setHeader(Constants.BLOBSTORE_MAKE_BLOB_PUBLIC, constant(false))
                 .to("direct:uploadBlob")
 
                 .routeId("tiamat-export-changelog-upload-zip-blob");

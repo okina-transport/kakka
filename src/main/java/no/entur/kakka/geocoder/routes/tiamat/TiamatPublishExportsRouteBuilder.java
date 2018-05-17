@@ -65,7 +65,7 @@ public class TiamatPublishExportsRouteBuilder extends BaseRouteBuilder {
                 exportConfigStrings.stream().filter(s -> !StringUtils.isEmpty(s)).map(configStr -> new TiamatExportTask(configStr)).collect(Collectors.toList());
 
 
-        singletonFrom("quartz2://kakka/tiamatPublishExport?cron=" + cronSchedule + "&trigger.timeZone=Europe/Oslo")
+        singletonFrom("quartz2://kakka/tiamatPublishExport?cron=" + cronSchedule + "&trigger.timeZone=Europe/Paris")
                 .autoStartup("{{tiamat.export.autoStartup:true}}")
                 .filter(e -> isSingletonRouteActive(e.getFromRouteId()))
                 .log(LoggingLevel.INFO, "Quartz triggers Tiamat exports for publish ")

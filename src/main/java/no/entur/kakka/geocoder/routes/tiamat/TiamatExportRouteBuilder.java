@@ -50,7 +50,7 @@ public class TiamatExportRouteBuilder extends BaseRouteBuilder {
                 .log(LoggingLevel.DEBUG, "Start Tiamat export")
                 .setHeader(Exchange.HTTP_METHOD, constant(org.apache.camel.component.http4.HttpMethods.GET))
                 .setBody(constant(null))
-                .toD(tiamatUrl + tiamatPublicationDeliveryPath + "/export/initiate/${header." + Constants.QUERY_STRING + "}")
+                .toD(tiamatUrl + tiamatPublicationDeliveryPath + "/export/initiate?${header." + Constants.QUERY_STRING + "}")
                 .convertBodyTo(ExportJob.class)
                 .setHeader(Constants.JOB_ID, simple("${body.id}"))
                 .setHeader(Constants.JOB_URL, simple(tiamatPublicationDeliveryPath + "/${body.jobUrl}"))
@@ -62,7 +62,7 @@ public class TiamatExportRouteBuilder extends BaseRouteBuilder {
         from("direct:tiamatExportMoveFileToBlobStore")
                 .log(LoggingLevel.DEBUG, getClass().getName(), "Fetching tiamat export file ...")
                 .toD(tiamatUrl + "/${header." + Constants.JOB_URL + "}/content")
-                .setHeader(BLOBSTORE_MAKE_BLOB_PUBLIC, constant(true))
+                .setHeader(BLOBSTORE_MAKE_BLOB_PUBLIC, constant(false))
                 .to("direct:uploadBlob")
                 .routeId("tiamat-export-move-file");
 
