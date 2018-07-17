@@ -62,7 +62,7 @@ public class TiamatExportRouteBuilder extends BaseRouteBuilder {
         from("direct:tiamatExportMoveFileToBlobStore")
                 .log(LoggingLevel.DEBUG, getClass().getName(), "Fetching tiamat export file ...")
                 .toD(tiamatUrl + "/${header." + Constants.JOB_URL + "}/content")
-                .setHeader(BLOBSTORE_MAKE_BLOB_PUBLIC, constant(false))
+                .setHeader(BLOBSTORE_MAKE_BLOB_PUBLIC, constant(true))
                 .to("direct:uploadBlob")
                 .routeId("tiamat-export-move-file");
 
