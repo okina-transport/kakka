@@ -38,8 +38,8 @@
         <keycloak.version>3.2.1.Final</keycloak.version>
         <spring.security.version>4.2.3.RELEASE</spring.security.version>
         <!-- Docker & Fabric8 Configs -->
-        <docker.from>registry.okina.fr/na/java-base-image</docker.from>
-        <docker.image>registry.okina.fr/na/${project.artifactId}:${project.version}</docker.image>
+        <docker.from>registry.okina.fr/okina/java-base-image</docker.from>
+        <docker.image>registry.okina.fr/mosaic/${project.artifactId}:${project.version}</docker.image>
         <docker.cleanup>none</docker.cleanup>
 
         <!-- fabric8.env.AB_JOLOKIA_AUTH_OPENSHIFT>true</fabric8.env.AB_JOLOKIA_AUTH_OPENSHIFT -->
