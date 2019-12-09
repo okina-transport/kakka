@@ -12,7 +12,7 @@
 
     <groupId>no.entur.kakka</groupId>
     <artifactId>kakka</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <name>kakka</name>
     <description>Geocoder builder</description>
